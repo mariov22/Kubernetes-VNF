@@ -1,0 +1,36 @@
+apiVersion: v1
+entries:
+  accesschart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-11-11T19:58:13.466785+01:00"
+    description: A Helm chart for Kubernetes
+    digest: bac6b557c89df4545a9c99efb09982a65b36eb873cabba035c06e1a540bd0e93
+    name: accesschart
+    type: application
+    urls:
+    - https://educaredes.github.io/sdedge-ns/accesschart-0.1.0.tgz
+    version: 0.1.0
+  cpechart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-11-11T19:58:13.467056+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 36f3ddd1aa28200bf3ea25a17ecefcbccdb318cd72456ab830d2e7a95c249c06
+    name: cpechart
+    type: application
+    urls:
+    - https://educaredes.github.io/sdedge-ns/cpechart-0.1.0.tgz
+    version: 0.1.0
+  wanchart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-11-11T19:58:13.467349+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 734ab1e78af772af4f29ff00abe47c84afaac515db872cf06e60984be3855840
+    name: wanchart
+    type: application
+    urls:
+    - https://educaredes.github.io/sdedge-ns/wanchart-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-11-11T19:58:13.466265+01:00"

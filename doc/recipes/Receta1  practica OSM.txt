@@ -1,0 +1,374 @@
+UNA VEZ REGISTRADO EL CLUSTER DE K8S EN OSM:
+
+registrar el cluster para que kubectl acceda desde la máquina OSM:
+- en la máquina K8S
+$ microk8s config 
+
+en la máquina OSM, editar el fichero ~/.kube/config y pegar el texto resultado
+del comando anterior al final del fichero
+Después, cambiar la línea 
+server: https://10.0.2.15:16443
+para que sea la dirección alcanzable del k8s
+server: https://192.168.56.11:16443
+
+probar por ejemplo con 
+$ kubectl get namespaces
+comprobar que sale el namespace remoto registrado para osm
+7b2950d8-f92b-4041-9a55-8d1837ad7b0a
+
+#VNXLAB2022-v3 (los de AccessNet2 y ExtNet2 creo que no hacen falta)
+sudo ovs-vsctl add-br ExtNet1
+
+sudo ovs-vsctl add-br AccessNet1
+
+sudo ovs-vsctl add-br AccessNet2
+
+sudo ovs-vsctl add-br ExtNet2
+
+export SDWNS="7b2950d8-f92b-4041-9a55-8d1837ad7b0a"
+
+sudo cat <<EOF | microk8s kubectl -n $SDWNS create -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: accessnet1
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: ovs-cni.network.kubevirt.io/accessnet1
+spec:
+ config: '{
+     "cniVersion": "0.4.0",
+     "type": "ovs",
+      "bridge": "AccessNet1"
+  }'
+EOF
+
+sudo cat <<EOF | microk8s kubectl -n $SDWNS create -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: extnet1
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: ovs-cni.network.kubevirt.io/extnet1
+spec:
+  config: '{
+    "cniVersion": "0.4.0",
+    "type": "ovs",
+    "bridge": "ExtNet1"
+  }'
+EOF
+
+
+#VNXNFVLAB2022-v1
+osm repo-add --type helm-chart --description "Repo para practica OSM" helmchartrepo https://josevirseda.github.io/Helm/
+
+osm package-create --vendor educaredes vnf accessknf
+osm package-create --vendor educaredes vnf cpeknf
+osm package-create --vendor educaredes ns renes
+osm package-build --skip-charm-build FOLDER
+
+export LASTNS=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+para borrarlo
+osm ns-delete $LASTNS
+para ver cuando se instancia
+watch -n 5 osm ns-list
+
+Obtener chart de una VNF: 
+osm vnf-show --literal $VNFID | grep name | grep access |  awk '{split($0,a,":");print a[2]}'
+
+
+Obtener identificadores de los DEPLOYMENT de un servicio "renes1"
+export NSTEXT=renes1
+for i in access cpe; do 
+  osm ns-list | grep $NSTEXT | awk '{split($0,a,"|");print a[3]}' | xargs osm vnf-list --ns | grep $i | awk '{split($0,a,"|");print a[2]}' | xargs osm vnf-show --literal | grep name | grep $i | awk '{split($0,a,":");print a[2]}'
+done
+
+Copiar y pegar el resultado en una ventana de la máquina k8s
+
+export VACC1=helmchartrepo-accesschart-...
+export VCPE1=helmchartrepo-cpechart-...
+
+# OLD A partir del identificador parcial, en la maquina k8s, fijar variable para abrir consolas
+export SDWNS="7b2950d8-f92b-4041-9a55-8d1837ad7b0a"
+export VACC1=$(microk8s kubectl -n $SDWNS get pods | grep helmchartrepo-accesschart-0023192822 | awk '{print $1}')
+export VCPE1=$( microk8s kubectl -n $SDWNS get pods | grep helmchartrepo-cpechart-0091594704 | awk '{print $1}')
+
+
+
+# OLD Sin identificador parcial, con un solo servicio de red en la maquina k8s, fijar variable para abrir consolas
+export SDWNS="7b2950d8-f92b-4041-9a55-8d1837ad7b0a"
+export VCPE1=$(microk8s kubectl -n $SDWNS get pods | grep helmchartrepo-cpechart | awk '{print $1}')
+export VACC1=$(microk8s kubectl -n $SDWNS get pods | grep helmchartrepo-accesschart | awk '{print $1}')
+
+
+Abrir consola 
+
+microk8s kubectl exec -n $SDWNS -it deploy/$VACC1 -- /bin/bash
+
+microk8s kubectl exec -n $SDWNS -it deploy/$VCPE1 -- /bin/bash
+
+
+TRAS ELLO, CREAR LOS ESCENARIOS VNX Y HACER LO DE "Configuracion rutas practica OSM"
+
+Troubleshooting
+
+Para pods que aparecen sin que los queramos --> borrar los deployments
+
+microk8s kubectl get deployments -n $SDWNS # obtenemos los nombres a borrar, DEPLOYMENT, sirve también para ver si los deployments están READY
+
+microk8s kubectl delete -n $SDWNS deployment DEPLOYMENT
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/#interacting-with-deployments-and-services
+
+
+Mirar 
+osm k8scluster-list
+
+El id del cluster se usa en:
+
+osm k8scluster-show <id>
+osm k8scluster-show --literal <id>  | grep -A1 projects
+
+Output: valores de configuración projects_read/projects_write contienen el
+namespace asociado a OSM en el cluster 
+
+Problemas en X y root 
+sudo xauth add $(xauth list | tail -1)
+
+Conectar dos máquinas del laboratorio con túneles
+
+En PC-OSM
+ovs-vsctl add-br rdsvlab
+vboxmanage modifyvm RDSV-OSM --nic2 bridged --bridgeadapter2 rdsvlab
+sudo ip address add  192.168.56.2/24 dev rdsvlab
+sudo ip link set dev rdsvlab mtu 1400
+sudo ip link set rdsvlab up
+vboxmanage startvm RDSV-OSM --type headless
+sudo ovs-vsctl add-port rdsvlab vxlanosm -- set interface vxlanosm type=vxlan options:remote_ip=138.4.31.124
+
+
+En PC-K8S
+sudo ovs-vsctl add-br rdsvlab
+vboxmanage modifyvm RDSV-K8S --nic2 bridged --bridgeadapter2 rdsvlab
+sudo ip address add  192.168.56.1/24 dev rdsvlab
+sudo ip link set dev rdsvlab mtu 1400
+sudo ip link set rdsvlab up
+vboxmanage startvm RDSV-K8S --type headless
+sudo ovs-vsctl add-port rdsvlab vxlanosm -- set interface vxlanosm type=vxlan options:remote_ip=138.4.31.125
+
+
+
+
+  897  ifconfig rdsvlab 192.168.56.1/24
+  898  vboxmanage startvm RDSV-OSM --type headless
+  899  ping 192.168.56.12
+  900  ovs-vsctl add-br rdsvlab2
+  901  vboxmanage modifyvm RDSV-K8S --nic2 bridged --bridgeadapter2 rdsvlab2
+  902  ovs-vsctl add-port rdsvlab vxlanosm -- set interface vxlanosm type=vxlan options:remote_ip=127.0.0.1
+  903  ovs-vsctl add-port rdsvlab2 vxlank8s -- set interface vxlank8s  type=vxlan options:remote_ip=127.0.0.1
+  904  less /var/log/openvswitch
+  905  ls /var/log/openvswitch
+  906  tail  /var/log/openvswitch/ovs-vswitchd.log
+  907  ovs-vsctl add-port rdsvlab2 vxlank8s -- set interface vxlank8s  type=vxlan options:remote_ip=127.0.0.1 options:key=1
+  908  ovs-vsctl  set interface vxlank8s  type=vxlan options:remote_ip=127.0.0.1 options:key=1
+  909  ovs-vsctl show
+  910  vboxmanage startvm RDSV-K8S --type headless
+
+
+Cosas viejas:
+
+<!-- En la máquina RDSV-K8S editar la dirección de _eth1_ para que coincida con la
+dirección de la máquina local. Para ello edite el fichero _/etc/netplan_:
+
+```
+cd /etc/netplan
+sudo nano 01-netcfg.yaml
+```
+
+Y luego aplique el cambio con:
+
+```
+sudo netplan apply
+```
+
+Use _ifconfig_ para comprobar si se ha realizado el cambio. Anote también la
+dirección de la interfaz _eth0_.
+
+Nota: la máquina virtual se suministra con una regla de NAT para que el tráfico
+dirigido hacia la API de k8s la máquina física se redirija
+a la máquina virtual (puerto 16443). Eso hace posible que OSM pueda comunicarse
+con el clúster k8s de la mv -->
+
+
+Comandos creacion usuarios OSM:
+
+osm project-create <project-name>
+osm user-create <user> --password <pass> --project-role-mappings <project-name>,project_admin
+
+### 2. OSM definition of the k8s cluster and network configuration
+
+
+Configure from a terminal the environment variables for the OSM client installed
+on _RDSV-K8S_ to access the server, as well as an alias for 
+the `microk8s kubectl` command:
+
+```
+echo "export OSM_USER=nombre-de-usuario" >> ~/.bashrc
+echo "export OSM_PASSWORD=password-de-usuario" >> ~/.bashrc
+echo "export OSM_PROJECT=proyecto-de-usuario" >> ~/.bashrc
+
+echo "export OSM_HOSTNAME=10.11.12.1" >> ~/.bashrc
+echo "alias kubectl='microk8s kubectl'" >> ~/.bashrc
+source ~/.bashrc
+```
+
+Register the cluster in OSM. To do this, obtain the address of the mv on the
+10.11.12.0/24 network from the tunnel via:
+
+
+```
+ifconfig | grep 10.11.12
+```
+
+Edit the ~/k8s-cluster.yaml file to replace your IP address with that of the
+tunnel: use an editor and modify the _server_ line by replacing the IP.
+
+Then register a vim _dummy_ and a cluster dependent on that vim with the
+following commands:
+
+```
+osm vim-create --name dummy_vim --user u --password p --tenant p \
+--account_type dummy --auth_url http://localhost/dummy
+
+KID=$(osm k8scluster-add --creds ~/k8s-cluster.yaml --version 1.21 \
+--vim dummy_vim --description "External k8s cluster" --k8s-nets \
+'{"net1": "osm-ext"}' microk8s-cluster)
+```
+And check that the cluster identifier is correctly returned via:
+:
+
+```
+echo $KID
+```
+
+> **Example:**
+> 
+>```
+>~$ echo $KID
+>68945185-1051-4cc0-8b1e-26382fc729e7
+>```
+
+Get the information registered in OSM for the cluster:
+
+```
+osm k8scluster-show $KID
+```
+
+In the output of the above command, look for information about the namespace to
+be used by OSM in the cluster to deploy the network services pods. You can use:
+
+```
+osm k8scluster-show --literal $KID | grep -A1 projects
+
+```
+
+> **Example:**
+> 
+>```
+>~$ osm k8scluster-show --literal $KID | grep -A1 projects
+>projects_read:
+>- 66ad98eb-bc56-48a9-96c8-8d14c612931c
+>projects_write:
+>- 66ad98eb-bc56-48a9-96c8-8d14c612931c
+>```
+
+Define a variable to store this value, which will be used in the lab scripts.
+
+```
+export SDWNS=<namespace> #  no spaces and no < >
+```
+
+> **Example:**
+> 
+>```
+>export SDWNS=66ad98eb-bc56-48a9-96c8-8d14c612931c
+>```
+
+Check if the namespace exists with:
+
+```
+kubectl get namespaces
+```
+
+If it does not exist, create the namespace in the k8s cluster (this is done by
+OSM the first time a service is instantiated, but in our case we create it
+before so we can do the configuration for the next step):
+
+```
+kubectl create namespace $SDWNS 
+```
+
+And use the _get namespaces_ command again to check if it has been created. 
+
+
+Then, to connect the namespace to the VNX scenarios, 2 _Multus_ Network
+Attachment Definitions associated to that namespace must be created by executing
+the commands:
+
+```
+cat <<EOF | kubectl create -n $SDWNS -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: extnet1
+ annotations:
+   k8s.v1.cni.cncf.io/resourceName: ovs-cni.network.kubevirt.io/ExtNet1
+spec:
+ config: '{
+   "cniVersion": "0.3.1",
+   "type": "ovs",
+   "bridge": "ExtNet1"
+ }'
+EOF
+
+cat <<EOF | kubectl create -n $SDWNS -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+ name: accessnet1
+ annotations:
+   k8s.v1.cni.cncf.io/resourceName: ovs-cni.network.kubevirt.io/AccessNet1
+spec:
+ config: '{
+   "cniVersion": "0.3.1",
+   "type": "ovs",
+   "bridge": "AccessNet1"
+ }'
+EOF
+
+```
+
+Check that they have been created with
+
+```
+kubectl get -n $SDWNS network-attachment-definitions
+```
+
+> **Example:**
+>
+>```
+>~> kubectl get -n $SDWNS network-attachment-definitions
+>NAME         AGE
+>extnet1      90s
+>accessnet1   88s
+>```
+
+And check the details, with
+
+```
+kubectl get -n $SDWNS network-attachment-definition extnet1 -o yaml
+kubectl get -n $SDWNS network-attachment-definition accessnet1 -o yaml
+```
+
+Create a docker image using the folder name
+
+sudo docker build -t $(echo ${PWD##*/}) .

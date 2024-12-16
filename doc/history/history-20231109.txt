@@ -1,0 +1,834 @@
+    1  sudo lvresize --resizefs --size +31GB /dev/mapper/ubuntu--vg-ubuntu--lv 
+    2  sudo df -h
+    3  apt remove openvswitch-testcontroller 
+    4  sudo apt remove openvswitch-testcontroller 
+    5  sudo mn
+    6  /usr/local/bin/clean_and_halt 
+    7  ls
+    8  cd Desktop/
+    9  git clone https://github.com/educaredes/nfv-lab.git
+   10  cd nfv-lab
+   11  ls -la
+   12  ls -al
+   13  cd bin
+   14  ls
+   15  cd ..
+   16  cd bin
+   17  wget idefix.dit.upm.es/download/rdsv/tinc/install tun
+   18  wget idefix.dit.upm.es/download/rdsv/tinc/install-tun
+   19  chmod +x install-tun 
+   20  ls -al
+   21  chmod +x prepare-osmlab 
+   22  ./install-tun Y
+   23  ./prepare-osmlab Y
+   24  exho $SDWNS
+   25  echo $SDWNS
+   26  export $SDWNS=af75affa-099c-4a3b-9021-793fe29ffe42
+   27  export SDWNS=af75affa-099c-4a3b-9021-793fe29ffe42
+   28  firefox 10.11.12.1 &
+   29  sudo ovs-vsctl show
+   30  cd ..
+   31  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+   32  echo $NSID1
+   33  ping 10.11.12.1
+   34  ls
+   35  cd    
+   36  source .bashrc
+   37  cd Desktop/nfv-lab/
+   38  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+   39  echo $NSID1
+   40  watch osm ns-list
+   41  ifconfig | grep 10.11.12
+   42  osm ns-list
+   43  osm ns-delete $NSID1
+   44  cd bin
+   45  ls
+   46  vi prepare-osmlab 
+   47  cd
+   48  cd Desktop/nfv-lab/
+   49  ls
+   50  cd bin
+   51  ls
+   52  less prepare-osmlab 
+   53  less \$HOME/k8s-cluster.yaml 
+   54  less /home/upm/k8s-cluster.yaml 
+   55  crecreate file k8s-cluster
+   56  cd ..
+   57  grep -R k8s-cluster
+   58  cd 
+   59  microk8s config > k8s-cluster2.yaml
+   60  diff k8s-cluster.yaml k8s-cluster2.yaml 
+   61  ifconfig
+   62  microk8s config --help
+   63  microk8s config -l
+   64  microk8s config -l > k8s-clusterl.yaml
+   65  diff k8s-cluster.yaml k8s-clusterl.yaml 
+   66  sed 's/^\(     server: https:\/\/\).*/1'10.11.12.90:16443'/' k8s-clusterl.yaml 
+   67  less k8s-clusterl.yaml 
+   68  sed 's/^\(    server: https:\/\/\).*/1'10.11.12.90:16443'/' k8s-clusterl.yaml 
+   69  sed 's/^\(    server: https:\/\/\).*/\1'10.11.12.90:16443'/' k8s-clusterl.yaml 
+   70  sed -i 's/^\(    server: https:\/\/\).*/\1'10.11.12.90:16443'/' k8s-clusterl.yaml 
+   71  cat k8s-cluster.yaml 
+   72  cat k8s-clusterl.yaml 
+   73  ls
+   74  cd Desktop/
+   75  ls
+   76  cd nfv-lab/
+   77  ls
+   78  cd bin
+   79  ls
+   80  vi prepare-osmlab 
+   81  ./prepare-osmlab 
+   82  ./prepare-osmlab Y
+   83  cd ..
+   84  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+   85  watch osm ns-list
+   86  cd /home/upm/shared/nfv-lab
+   87  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+   88  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -t
+   89  ./osm_renes1.sh 
+   90  cd
+   91  ls
+   92  osm ns-delete $NSID1 ns-dele
+   93  osm ns-delete $NSID1 
+   94  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+   95  cd Desktop/nfv-lab/
+   96  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+   97  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -P
+   98  cd shared
+   99  cd ~/shared
+  100  git clone https://github.com/educaredes/nfv-lab.git
+  101  cd nfv-lab
+  102  cd bin
+  103  ./install-tun Y
+  104  ping 10.11.12.1
+  105  ./prepare-osmlab Y
+  106  exit
+  107  cd shared
+  108  cd nfv-lab
+  109  echo "-- OSM_USER=$OSM_USER"
+  110  echo "-- OSM_PASSWORD=$OSM_PASSWORD"
+  111  echo "-- OSM_PROJECT=$OSM_PROJECT"
+  112  echo "-- OSM_HOSTNAME=$OSM_HOSTNAME"
+  113  echo "-- SDWNS=$SDWNS"
+  114  firefox 10.11.12.1 &
+  115  kubectl get namespaces
+  116  cd helm
+  117  grep -R "educaredes/vnf-img"
+  118  cd ..
+  119  cd pck
+  120  ls
+  121  cd ..
+  122  c img
+  123  cd img
+  124  ls -al
+  125  cd vnf-img
+  126  ls -la
+  127  less Dockerfile 
+  128  sudo ovs-vsctl show
+  129  cd /home/upm/shared/nfv-lab
+  130  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+  131  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -t
+  132  xhost +
+  133  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+  134  echo $NSID1
+  135  less osm_renes1.sh 
+  136  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+  137  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -P
+  138  exit
+  139  less /etc/tinc/vnxtunY/tinc.conf 
+  140  less /etc/tinc/vnxtunY/hosts/vnxtunserver 
+  141  less /etc/tinc/vnxtunY/hosts/vnxtunYclient 
+  142  less /etc/tinc/vnxtunY/hosts/vnxtunserver 
+  143  less /etc/tinc/vnxtunY/hosts/vnxtunYclient 
+  144  less /etc/tinc/vnxtunY/hosts/vnxtunserver 
+  145  less /etc/tinc/vnxtunY/hosts/vnxtunYclient 
+  146  less /etc/tinc/vnxtunY/hosts/vnxtunserver 
+  147  ping 10.11.12.1
+  148  less /etc/tinc/vnxtunY/tinc-up 
+  149  less /etc/tinc/vnxtunY/tinc-down 
+  150  less /etc/tinc/vnxtunY/tinc-up 
+  151  echo $IANTERFACE
+  152  echo $INTERFACE
+  153  echo "-- OSM_USER=$OSM_USER"
+  154  echo "-- OSM_PASSWORD=$OSM_PASSWORD"
+  155  echo "-- OSM_PROJECT=$OSM_PROJECT"
+  156  echo "-- OSM_HOSTNAME=$OSM_HOSTNAME"
+  157  echo "-- SDWNS=$SDWNS"
+  158  exit
+  159  ping 10.11.12.1
+  160  echo "-- OSM_USER=$OSM_USER"
+  161  echo "-- OSM_PASSWORD=$OSM_PASSWORD"
+  162  echo "-- OSM_PROJECT=$OSM_PROJECT"
+  163  echo "-- OSM_HOSTNAME=$OSM_HOSTNAME"
+  164  echo "-- SDWNS=$SDWNS"
+  165  clear
+  166  cd Desktop/nfv-lab/
+  167  ls
+  168  clear
+  169  grep -R "educaredes/vnf-img" helm
+  170  clear
+  171  cd /home/upm/shared/nfv-lab
+  172  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+  173  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -P
+  174  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+  175  clear
+  176  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+  177  echo $NSID1
+  178  watch osm ns-list
+  179  kubectl -n $SDWNS get pods
+  180  ACCPOD=helmchartrepo-accesschart-0082832822-77d65d877b-zkf5l
+  181  CPEPOD=helmchartrepo-cpechart-0058030614-fb7f48b49-9r2xx
+  182  kubectl -n $SDWNS exec -it $ACCPOD -- ifconfig eth0
+  183  kubectl -n $SDWNS exec -it $CPEPOD -- ping -c 3 10.1.77.25
+  184  ./osm_renes1.sh 
+  185  clear
+  186  history
+  187  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+  188  export NSID2=$(osm ns-create --ns_name renes2 --nsd_name renes --vim_account dummy_vim)
+  189  echo $NSID2
+  190  kubectl -n $SDWNS get pods
+  191  ls
+  192  vi osm_renes_start.sh
+  193  export SINAME="renes2"
+  194  vi osm_renes_start.sh 
+  195  deployment_id() {     echo `osm ns-list | grep $1 | awk '{split($0,a,"|");print a[3]}' | xargs osm vnf-list --ns | grep $2 | awk '{split($0,a,"|");print a[2]}' | xargs osm vnf-show --literal | grep name | grep $2 | awk '{split($0,a,":");print a[2]}' | sed 's/ //g'`; }
+  196  ## 0. Obtener deployment ids de las vnfs
+  197  echo "## 0. Obtener deployment ids de las vnfs"
+  198  OSMACC=$(deployment_id $SINAME "access")
+  199  OSMCPE=$(deployment_id $SINAME "cpe")
+  200  echo $OSMACC
+  201  echo $OSMCPE
+  202  export VACC="deploy/$OSMACC"
+  203  export VCPE="deploy/$OSMCPE"
+  204  osm ns-list
+  205  osm ns-delete b25e6426-7861-40bf-8811-2f04c400362f
+  206  osm ns-list renes1
+  207  osm ns-list -h
+  208  osm ns-list --filter renes1
+  209  osm ns-list --filter ns.instance.name=renes1
+  210  osm ns-list --filter nsi.name=renes1
+  211  osm ns-list --filter nsd-ref=renes
+  212  osm ns-list --filter nsd-ref=renes1
+  213  osm ns-list --filter -h
+  214  osm ns-list
+  215  osm ns-list --filter 
+  216  osm ns-list --filter 
+  217  osm ns-list --filter nsd-ref=renes1
+  218  osm ns-list --filter nsd-ref=renes*
+  219  osm ns-list --filter nsd-ref=renes
+  220  osm ns-list --filter nsi-name=renes1
+  221  osm ns-list --filter n
+  222  osm ns-list 
+  223  osm ns-list -v
+  224  osm ns-list -h
+  225  osm ns-list -vvv
+  226  osm -vvv ns-list 
+  227  osm -vv ns-list 
+  228  osm -vv ns-list --filter instantiate_params.nsName=renes2
+  229  osm -vv ns-list --filter instantiate_params.nsName=renes1
+  230  osm ns-list --filter instantiate_params.nsName=renes1
+  231  osm ns-list --filter instantiate_params.nsName=renes1 --literal
+  232  osm ns-list --literal  --filter instantiate_params.nsName=renes1 
+  233  osm ns-list --long  --filter instantiate_params.nsName=renes1 
+  234  osm ns-list  --filter instantiate_params.nsName=renes1 | wc
+  235  osm ns-list  --filter instantiate_params.nsName=renes3 | wc
+  236  osm ns-list  --filter instantiate_params.nsName=renes3 | grep renes3
+  237  osm ns-list  --filter instantiate_params.nsName=renes1 | grep renes1
+  238  ls
+  239  cd 
+  240  cd Desktop/
+  241  ls
+  242  cd nfv-lab/
+  243  ls -al
+  244  chmod +x osm_renes2.sh 
+  245  osm ns-list  --filter instantiate_params.nsName=renes2 | grep renes2
+  246  ./osm_renes2.sh 
+  247  sudo vnx -f vnx/*home* -P
+  248  cd /home/upm/shared/nfv-lab
+  249  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+  250  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -P
+  251  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+  252  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -t
+  253  xhost +
+  254  clear
+  255  OSMACC=$(deployment_id $SINAME "access")
+  256  OSMCPE=$(deployment_id $SINAME "cpe")
+  257  echo $OSMACC
+  258  echo $OSMCPE
+  259  deployment_id() {     echo `osm ns-list | grep $1 | awk '{split($0,a,"|");print a[3]}' | xargs osm vnf-list --ns | grep $2 | awk '{split($0,a,"|");print a[2]}' | xargs osm vnf-show --literal | grep name | grep $2 | awk '{split($0,a,":");print a[2]}' | sed 's/ //g'`; }
+  260  ## 0. Obtener deployment ids de las vnfs
+  261  echo "## 0. Obtener deployment ids de las vnfs"
+  262  OSMACC=$(deployment_id $SINAME "access")
+  263  OSMCPE=$(deployment_id $SINAME "cpe")
+  264  vi osm_renes1.sh 
+  265  vi osm_renes_start.sh 
+  266  cd Desktop/nfv-lab/
+  267  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+  268  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -t
+  269  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+  270  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -t
+  271  clear
+  272  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+  273  echo $NSID1
+  274  kubectl -n $SDWNS get pods
+  275  ACCPOD=helmchartrepo-accesschart-0075114501-5fd8796c5c-45x6w 
+  276  CPEPOD=helmchartrepo-cpechart-0097926954-b665b4785-2b8vq
+  277  kubectl -n $SDWNS exec -it $ACCPOD -- ifconfig eth0
+  278  kubectl -n $SDWNS exec -it $CPEPOD -- ping -c 3 10.1.77.31
+  279  ./osm_renes1.sh
+  280  xhost +
+  281  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+  282  cd Desktop/nfv-lab/
+  283  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -P
+  284  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -P
+  285  exit
+  286  cd Desktop/nfv-lab/
+  287  ls
+  288  clear
+  289  xhost +
+  290  clear
+  291  cd /home/upm/shared/nfv-lab
+  292  sudo vnx -f vnx/nfv3_home_lxc_ubuntu64.xml -t
+  293  sudo vnx -f vnx/nfv3_server_lxc_ubuntu64.xml -t
+  294  clear
+  295  export NSID1=$(osm ns-create --ns_name renes1 --nsd_name renes --vim_account dummy_vim)
+  296  echo $NSID1
+  297  osm ns-list
+  298  ./osm_renes1.sh
+  299  sudo ovs-vsctl show
+  300  clear
+  301  exit
+  302  ls
+  303  osm -h
+  304  osm nspkg-list
+  305  osm vnfd-list
+  306  exit
+  307  killall firefox
+  308  firefox &
+  309  ls
+  310  cd Desktop/nfv-lab/
+  311  ls
+  312  cd ..
+  313  ls -al
+  314  cd ..
+  315  cd nfv-lab/
+  316  ls
+  317  cd ..
+  318  ls p32 
+  319  rm p32
+  320  exit
+  321  cd helm
+  322  helm 
+  323  sudo apt-get install helm
+  324  sudo apt-get update
+  325  sudo apt-get install helm
+  326  cd ..
+  327  ls
+  328  man ssh-copy-id 
+  329  wxit
+  330  exit
+  331  helm pack helm/testchart
+  332  helm package helm/testchart
+  333  export NSID1=$(osm ns-create --ns_name test --nsd_name test --vim_account dummy_vim)
+  334  watch osm ns-list
+  335  osm vnfd-create pck/testknf_vnfd.tar.gz 
+  336  osm nsd-create pck/test_nsd.tar.gz 
+  337  export NSID1=$(osm ns-create --ns_name test --nsd_name test --vim_account dummy_vim)
+  338  watch osm ns-list
+  339  kubectl -n $SDWNS get pods
+  340  POD1=helmchartrepo-testchart-0009363770-65bc87c5c8-phf86
+  341  POD2=helmchartrepo-testchart-0089685354-6c4b8bcccc-z7xp5
+  342  kubectl -n $SDWNS exec -it $POD1 -- ifconfig eth0
+  343  kubectl -n $SDWNS exec -it $POD1 -- ip link
+  344  kubectl -n $SDWNS exec -it $POD1 -- /bin/bash
+  345  history | grep POD1
+  346  history | less
+  347  kubectl -n $SDWNS get pods
+  348  POD1=helmchartrepo-testchart-0009363770-65bc87c5c8-phf86
+  349  POD2=helmchartrepo-testchart-0089685354-6c4b8bcccc-z7xp5
+  350  kubectl -n $SDWNS exec -it $POD1 -- /bin/bash
+  351  history | tail 
+  352  history | tail 20
+  353  history | tail -n 20
+  354  helm package helm/testchart
+  355  export NSID1=$(osm ns-create --ns_name test --nsd_name test --vim_account dummy_vim)
+  356  watch osm ns-list
+  357  kubectl -n $SDWNS get pods
+  358  POD1=helmchartrepo-testchart-0038389280-864f9bf67f-rrmk8
+  359  POD2=helmchartrepo-testchart-0097562434-5bb8b9b4d8-67p86
+  360  kubectl -n $SDWNS exec -it $POD1 -- /bin/bash
+  361  kubectl -n $SDWNS exec -it $POD1 -- /bin/sh
+  362  kubectl -n $SDWNS list services
+  363  kubectl -n $SDWNS get services
+  364  kubectl -n $SDWNS exec -it $POD1 -- /bin/bash
+  365  kubectl -n $SDWNS exec -it $POD1 -- /bin/sh
+  366  kubectl get services
+  367  kubectl -n $SDWNS get services
+  368  echo $POD
+  369  kubectl -n $SDWNS exec -it $POD1 -- /bin/bash
+  370  kubectl -n $SDWNS exec -it $POD1 -- /bin/sh
+  371  kubectl -n $SDWNS get services
+  372  kubectl -n $SDWNS describe service helmchartrepo-testchart-0038389280
+  373  ping 10.152.183.54
+  374  kubectl -n $SDWNS exec -it $POD1 -- /bin/sh
+  375  kubectl -n $SDWNS get pods
+  376  kubectl -n $SDWNS exec -it $POD1 -- /bin/sh
+  377  kubectl get pods --namespace=kube-system -l k8s-app=kube-dns
+  378  kubectl logs --namespace=kube-system -l k8s-app=kube-dns
+  379  kubectl get endpoints kube-dns --namespace=kube-system
+  380  kubectl -n $SDWNS exec -it $POD1 -- /bin/sh
+  381  history | grep "^helm"
+  382  history | grep -i "^helm"
+  383  history | grep -e "^helm"
+  384  history | grep -e "helm"
+  385  helm package helm/pingchart
+  386  helm package helm/pongchart
+  387  history | grep pack  
+  388  ls
+  389  cd pck
+  390  ls
+  391  osm package-build --skip-charm-build pingknf_vnfd
+  392  osm package-build --skip-charm-build pongknf_vnfd
+  393  osm package-build --skip-charm-build pingpong_nsd/
+  394  kkhelm repo index --url https://educaredes.github.io/nfv-lab/ .
+  395  cd ..
+  396  helm repo index --url https://educaredes.github.io/sdw-lab/ .
+  397  less index.yaml 
+  398  osm vnfd-create pck/pingknf_vnfd.tar.gz 
+  399  osm vnfd-create pck/pongknf_vnfd.tar.gz 
+  400  osm nsd-create pck/pingpong_nsd.tar.gz 
+  401  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  402  watch osm ns-list
+  403  kubectl -n $SDWNS get pods
+  404  PING=helmchartrepo-pingchart-0024283152-6f478c8dbc-9cszp
+  405  PONG=helmchartrepo-pongchart-0047283936-67d5d7d9d6-4dd4l
+  406  kubectl -n $SDWNS exec -it $PONG -- ifconfig eth0
+  407  kubectl -n $SDWNS exec -it $PING -- /bin/bash
+  408  kubectl -n $SDWNS exec -it $PING -- ping -c 5 10.1.77.23
+  409  kubectl -n $SDWNS exec -it $PING -- ping  10.1.77.23
+  410  kubectl -n $SDWNS exec -it $PING -- ping -c 3 10.1.77.23
+  411  mv repo.png doc/img/sdw-lab-k8s-repository.png
+  412  cd bin
+  413  ./prepare-osmlab Y
+  414  ovs-vsctl show
+  415  sudo ovs-vsctl show
+  416  vi ~/.bashrc 
+  417  ./prepare-osmlab Y
+  418  cd ..
+  419  osm vnfd-create pck/pingknf_vnfd.tar.gz 
+  420  bash
+  421  osm vnfd-create pck/pingknf_vnfd.tar.gz
+  422  osm vnfd-create pck/pongknf_vnfd.tar.gz
+  423  osm nsd-create pck/pingpong_nsd.tar.gz
+  424  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  425  echo $NSID1
+  426  watch osm ns-list
+  427  osm ns-list
+  428  ls
+  429  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  430  watch osm ns-list
+  431  vi .bashrc 
+  432  ping 8.8.8.8
+  433  ls
+  434  rm -R sdw-lab/
+  435  yes | rm -R sdw-lab/
+  436  history | grep helm
+  437  helm package helm/pingchart
+  438  helm package helm/pongchart
+  439  history | grep osm
+  440  osm vnfd-create pck/pingknf_vnfd.tar.gz
+  441  osm nsd-list
+  442  osm nsd-delete ce493f0c-33d7-4462-bbca-6d7470a18ae9
+  443  osm vnfd-list
+  444  osm vnfd-delete 9c1ed9c0-2bdb-46e7-8493-9e363e1c6742
+  445  osm vnfd-delete 676f91b6-fb88-4662-8203-c772664a4f26
+  446  history | grep osm
+  447  osm vnfd-create pck/pingknf_vnfd.tar.gz
+  448  osm vnfd-create pck/pongknf_vnfd.tar.gz
+  449  osm nsd-create pck/pingpong_nsd.tar.gz
+  450  history | grep NSD
+  451  history | grep NS
+  452  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  453  history | grep kubectl
+  454  kubectl -n $SDWNS get pods
+  455  osm ns-list
+  456  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  457  watch ns-list
+  458  watch osm ns-list
+  459  kubectl -n $SDWNS get pods
+  460  PING=helmchartrepo-pingchart-0042742527-b4d95c5f-lvdpz
+  461  PONG=helmchartrepo-pongchart-0053763176-6647886664-lzfpt
+  462  history | grep -B 2 PING 
+  463  kubectl -n $SDWNS exec -it $PONG -- ifconfig eth0
+  464  kubectl -n $SDWNS exec -it $PONG -- ifconfig net1
+  465  kubectl -n $SDWNS exec -it $PONG -- ifconfig 
+  466  osm ns-delete $NSID1
+  467  history | grep helm
+  468  helm repo index --url https://lbellido.github.io/sdw-lab/ .
+  469  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  470  watch osm ns-list
+  471  kubectl -n $SDWNS get pods
+  472  PING=helmchartrepo-pingchart-0060258761-7778bd5d75-hx8hs
+  473  PONG=helmchartrepo-pongchart-0028018116-f69f6b77c-zkfxx
+  474  kubectl -n $SDWNS exec -it $PONG -- ifconfig net1
+  475  kubectl -n $SDWNS exec -it $PONG -- ping -c 3 10.100.1.254
+  476  ovs-vsctl show
+  477  sudo ovs-vsctl show
+  478  kubectl -n $SDWNS exec -it $PING  -- /bin/sh 
+  479  kubectl get -n $SDWNS network-attachment-definitions
+  480  osm ns-delete $NSID1
+  481  sudo ovs-vsctl  show 
+  482  kubectl get -n $SDWNS network-attachment-definitions
+  483  kubectl  -n $SDWNS describe pod $PING 
+  484  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  485  watch osm ns-list
+  486  kubectl  -n $SDWNS get pods
+  487  PING=helmchartrepo-pingchart-0095146607-7cdddc5479-b2ltr
+  488  kubectl  -n $SDWNS describe pod $PING 
+  489  kubectl -n $SDWNS exec -it $PING -- ifconfig net1
+  490  kubectl -n $SDWNS exec -it $PONG -- ifconfig net1
+  491  kubectl  -n $SDWNS get pods
+  492  PONG=helmchartrepo-pongchart-0091323865-8c9f8866f-hwqch
+  493  kubectl -n $SDWNS exec -it $PONG -- ifconfig net1
+  494  kubectl -n $SDWNS exec -it $PING -- ping 10.20.0.1
+  495  kubectl -n $SDWNS exec -it $PONG --  wget 10.20.0.254
+  496  kubectl -n $SDWNS exec -it $PONG --  ping -c 3 8.8.8.8
+  497  kubectl -n $SDWNS exec -it $PONG --  traceroute -In 3 8.8.8.8
+  498  kubectl -n $SDWNS exec -it $PONG --  traceroute -In  8.8.8.8
+  499  kubectl -n $SDWNS exec -it $PING --  /bin/ss
+  500  kubectl -n $SDWNS exec -it $PING --  /bin/sh
+  501  kubectl -n $SDWNS exec -it $PONG --  /bin/sh
+  502  osm ns-delete $NSID1
+  503  history | grep helm  
+  504  helm package helm/pingchart helm/pongchart
+  505  helm repo index --url https://lbellido.github.io/sdw-lab/ .
+  506  cd /usr/share/vnx/examples/
+  507  ls
+  508  grep www *
+  509  cp tutorial_lxc_ubuntu64.xml ~/shared/sdw-lab/vnx/ 
+  510  ls
+  511  cd conf/
+  512  ls
+  513  cd tutorial_lxc_ubuntu-sdn/
+  514  ls
+  515  cd ..
+  516  cd tutorial_ubuntu/
+  517  ls
+  518  cd h4
+  519  ls
+  520  less index.html 
+  521  cp index.html ~/shared/sdw-lab/vnx/conf/
+  522  cd ..
+  523  grep boot *
+  524  cd 
+  525  cd shared/
+  526  ls
+  527  cd sdw-lab/
+  528  history | grep pingpong1
+  529  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  530  osm ns-delete $NSID1
+  531  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  532  watch osm ns-list
+  533  kubectl  -n $SDWNS get pods
+  534  PING=helmchartrepo-pingchart-0082562998-54bd5cfb68-fr4nw
+  535  PONG=helmchartrepo-pongchart-0031513389-f9b55fb9f-qnkx9
+  536  kubectl  -n $SDWNS exec -it $PONG curl 10.100.3.3
+  537  kubectl  -n $SDWNS exec -it $PONG -- curl 10.100.3.3
+  538  kubectl  -n $SDWNS exec -it $PONG -- wget  10.100.3.3 -o -
+  539  kubectl  -n $SDWNS exec -it $PONG -- ping 10.100.3.3
+  540  kubectl  -n $SDWNS exec -it $PONG -- ifconfig net1
+  541  kubectl  -n $SDWNS exec -it $PONG -- ping 10.100.1.254
+  542  kubectl  -n $SDWNS exec -it $PONG -- ping 10.100.3.3
+  543  kubectl  -n $SDWNS exec -it $PONG -- ip route
+  544  helm repo index --url https://lbellido.github.io/sdw-lab/ .
+  545  helm package helm/pingchart helm/pongchart
+  546  helm repo index --url https://lbellido.github.io/sdw-lab/ .
+  547  osm ns-delete $NSID1
+  548  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  549  watch osm ns-list
+  550  kubectl  -n $SDWNS get pods
+  551  PING=helmchartrepo-pingchart-0078766717-7c49c74cb-2hf7w
+  552  PONG=helmchartrepo-pongchart-0051950868-57546669bd-tr4n9 
+  553  kubectl  -n $SDWNS exec -it $PONG -- wget  10.100.3.3 -o -
+  554  kubectl  -n $SDWNS exec -it $PONG -- wget -o - 10.100.3.3
+  555  kubectl  -n $SDWNS exec -it $PONG -- wget -O - 10.100.3.3
+  556  kubectl get -n $SDWNS network-attachment-definitions
+  557  kubectl get -n $SDWNS network-attachment-definitions mplswan
+  558  history
+  559  kubectl  -n $SDWNS exec -it $PONG -- ip route
+  560  kubectl  -n $SDWNS exec -it $PING -- ifconfig
+  561  history | grep helm
+  562  cd img
+  563  cd vnf-access/
+  564  docker build -t educaredes/vnf-access .
+  565  docker login -u educaredes
+  566  docker push educaredes/vnf-access
+  567  cd ../vnf-cpe
+  568  docker build -t educaredes/vnf-cpe .
+  569  docker push educaredes/vnf-cpe
+  570  cd ../vnf-wan/
+  571  docker build -t educaredes/vnf-wan .
+  572  docker push educaredes/vnf-wan
+  573  history | grep helm
+  574  helm package helm/accesschart helm/cpechart helm/wanchart 
+  575  cd ..
+  576  helm package helm/accesschart helm/cpechart helm/wanchart 
+  577  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  578  history | grep "osm nsd"
+  579  history | grep -C 5 "osm nsd"
+  580  history --help
+  581  history | grep -C 5 "osm nsd"
+  582  history | grep -C 5 "osm vnf"
+  583  osm vnfd-create pck/accessknf_vnfd.tar.gz 
+  584  osm vnfd-list
+  585  osm vnfd-delete  404b030a-01e5-4fde-bd22-3e2e01fa7a8a
+  586  history | grep "osm" 
+  587  cd pck
+  osm package-build --skip-charm-build accessknf_vnfd
+  osm package-build --skip-charm-build cpeknf_vnfd
+  osm package-build --skip-charm-build wanknf_vnfd
+  591  osm package-build --skip-charm-build corpcpe_nsd
+  592  osm package-build --skip-charm-build sdedge_nsd
+  593  exit
+  594  kubectl -n $SDWNS exec -it $CPE -- /bin/bash
+  595  CPE="deploy/helmchartrepo-cpechart-0085638655"
+  596  kubectl -n $SDWNS exec -it $CPE -- /bin/bash
+  597  CPE=helmchartrepo-cpechart-0022703640
+  598  CPE=deploy/$CPE
+  599  kubectl -n $SDWNS exec -it $CPE -- /bin/bash
+  600  exit
+  601  export NSID1=$(osm ns-create --ns_name pingpong1 --nsd_name pingpong --vim_account dummy_vim)
+  602  osm ns-list
+  603  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  604  osm ns-list
+  605  osm ns-delete de0d33a3-19a0-4a18-9e58-a3412c897e16
+  606  osm ns-list
+  607  ./sdedge1.sh 
+  608  ./podsh deploy/helmchartrepo-accesschart-0021104062
+  609  osm ns-delete $NSID1
+  610  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  611  osm ns-list
+  612  watch -g "osm ns-list | grep BUILDING" 
+  613  ./sdedge1.sh 
+  614  ./podsh deploy/helmchartrepo-accesschart-0019217416
+  615  kubectl get -n $SDWNS network-attachment-definitions
+  616  history | grep helm 
+  617  helm package helm/wanchart
+  618  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  619  less index-yaml
+  620  less index.yaml
+  621  osm ns-delete $NSID1
+  622  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  623  watch -g "osm ns-list | grep BUILDING" 
+  624  ./sdedge1.sh 
+  625  osm ns-delete $NSID1
+  626  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  627  watch "osm ns-list" 
+  628  ./sdedge1.sh 
+  629  osm ns-delete $NSID1
+  630  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  631  ./sdedge1
+  632  ./sdedge1.sh 
+  633  ./sdwan1.sh 
+  634  osm ns-delete $NSID1
+  635  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  636  watch "osm ns-list" 
+  637  ./sdedge1.sh 
+  638  ./sdwan1.sh 
+  639  osm ns-delete $NSID1
+  640  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  641  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)1w
+  642  watch "osm ns-list" 
+  643  echo $NSID
+  644  echo $NSIDD1
+  645  watch "osm ns-list" 
+  646  osm ns-delete 236f4724-c4a8-4423-bb8a-89f7eb806bdf
+  647  watch "osm ns-list" 
+  648  export NSID1=9de47244-bcc1-48cb-9584-130c62a63f85
+  649  ./sdedge1.sh 
+  650  ./sdwan1.sh 
+  651  ./podsh deploy/helmchartrepo-wanchart-0095287116
+  652  kubectl cluster-info
+  653  kubectl -n $SDWNS get services
+  654  ping 10.152.183.143
+  655  osm ns-delete 236f4724-c4a8-4423-bb8a-89f7eb806bdf
+  656  osm ns-delete $NSID1
+  657  osm ns-list
+  658  history | grep helm
+  659  helm package helm/wanchart
+  660  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  661  osm ns-list
+  662  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  663  watch "osm ns-list" 
+  664  ./sdedge1.sh 
+  665  ./sdwan1.sh 
+  666  history |less 
+  667  kubectl -n $SDWNS get services
+  668  wget localhost:32133
+  669  wget 10.152.183.118:32133
+  670  microk8s status
+  671  microk8s enable host-access
+  672  kubectl -n $SDWNS get services
+  673  curl loslcahost:32133
+  674  curl localhost:32133
+  675  osm ns-list
+  676  osm ns-delete $NSID1
+  677  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  678  osm ns-list
+  679  kubectl -n $SDWNS get services
+  680  curl 10.152.183.94:8080
+  681  ./sdedge1.sh 
+  682  ./sdwan1.sh 
+  683  curl 10.152.:8080
+  684  curl localhost:32133
+  685  kubectl -n $SDWNS get services
+  686  exit
+  687  ./podsh deploy/helmchartrepo-wanchart-0095661936
+  688  ./podsh deploy/helmchartrepo-wanchart-0076179668
+  689  exit
+  690  ls
+  691  history
+  692  kubectl -n $SDWNS get services
+  693  curl 10.0.1.1:31506
+  694  ping 10.1.1.1
+  695  ping 10.1.1.1 31331
+  696  curl 10.0.1.1:31331
+  697  kubectl -n $SDWNS get pods
+  698  kubectl -n $SDWNS exec -it helmchartrepo-cpechart-0081518547-6b67c84b9b-l2bwf -- /bin/bash
+  699  microk8s.kubectl get service --namespace kube-system
+  700  man dig
+  701  dig @10.152.183.10 kubernetes-dashboard 
+  702  dig @10.152.183.10 kubernetes-dashboard.svc.cluser.local
+  703  exit
+  704  osm ns-delete $NSID1
+  705  osm ns-list
+  706  osm ns-delete 4feb65d5-dbb9-4b36-9143-6b96b5ebe242
+  707  exit
+  708  cd shared/sdw-lab-fork/
+  709  ls
+  710  cd vnx
+  711  sudo vnx -f sdedge_nfv.xml -P
+  712  sudo vnx -f sdedge_nfv.xml -t
+  713  sudo vnx -f sdedge_nfv.xml -P
+  714  history | grep microk8s 
+  715  microk8s status
+  716  microk8s enable ingress
+  717  cd shared/
+  718  cd sdw-lab-fork/
+  719  ls
+  720  history | grep export
+  721  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  722  history | grep kubectl
+  723  kubectl -n $SDWNS get services
+  724  ping 10.152.183.29
+  725  curl 10.152.183.29:31996
+  726  curl 10.152.183.163:31792
+  727  ./sdedge1.sh 
+  728  ./sdwan1.sh 
+  729  curl 10.152.183.29:31996
+  730  kubectl proxy
+  731  kubectl get all --all-namespaces
+  732  token=$(microk8s kubectl -n kube-system get secret | grep default-token | cut -d " " -f1) microk8s kubectl -n kube-system describe secret $token
+  733  microk8s kubectl get all --all-namespaces
+  734  microk8s kubectl get all --all-namespaces | grep mia
+  735  osm ns-delete
+  736  osm ns-delete $NSID1
+  737  cd helm
+  738  ls
+  739  cd wanchart/templates/
+  740  vi service.yaml 
+  741  history | grep helm
+  742  helm package helm/ehemplo
+  743  helm package helm/ejemplo
+  744  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  745  history | grep osm ns
+  746  history | grep -C 5 "osm ns"
+  747  history | grep -C 5 "osm" | grep pack
+  748  kkosm package-build --skip-charm-build 
+  749  cd pck
+  750  osm package-build --skip-charm-build testknf_vnfd
+  751  osm package-build --skip-charm-build test_nsd
+  752  history | grep -C 5 "osm create"
+  753  history | grep -C 5 "osm"
+  754  osm vnfd-create testknf_vnfd.tar.gz 
+  755  osm vnfd-create test_nsd.tar.gz 
+  756  osm nsd-create test_nsd.tar.gz 
+  757  export NSID1=$(osm ns-create --ns_name ejemplo1 --nsd_name ejemplo --vim_account dummy_vim)
+  758  watch "osm ns-list" 
+  759  echo $NSID1
+  760  export NSID1=$(osm ns-create --ns_name test1 --nsd_name test --vim_account dummy_vim)
+  761  echo $NSID1
+  762  watch "osm ns-list" 
+  763  history | grep kubectl
+  764  kubectl -n $SDWNS get pods
+  765  kubectl -n $SDWNS get services
+  766  osm ns-delete $NSID1
+  767  helm package helm/ejemplo
+  768  cd ..
+  769  helm package helm/ejemplo
+  770  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  771  export NSID1=$(osm ns-create --ns_name test1 --nsd_name test --vim_account dummy_vim)
+  772  watch "osm ns-list" 
+  773  kubectl -n $SDWNS get services
+  774  kubectl -n $SDWNS get service list
+  775  kubectl -n $SDWNS service helmchartrepo-ejemplo-0092366323 --url
+  776  kubectl -n $SDWNS port-forwards
+  777* echo $
+  778  kubectl -n $SDWNS get service helmchartrepo-ejemplo-0092366323 --url
+  779  kubectl -n $SDWNS get service helmchartrepo-ejemplo-0092366323
+  780  kubectl -n $SDWNS get port-forwards
+  781  kubectl port-forwards -n $SDWNS
+  782  kubectl port-forward list -n $SDWNS
+  783  kubectl port-forward -h -n $SDWNS
+  784  kubectl options services
+  785  helm package helm/ejemplo
+  786  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  787  osm ns-delete $NSID1
+  788  cd pck
+  789  history | grep test_nsd
+  790  osm package-build --skip-charm-build test_nsd
+  791  osm ns-list
+  792  osm nsd-list
+  793  osm nsd-delete 89e505ee-14fb-415e-8c78-f5027ec4b49e
+  794  osm nsd-create test_nsd.tar.gz 
+  795  export NSID1=$(osm ns-create --ns_name test1 --nsd_name test --vim_account dummy_vim)
+  796  watch "osm ns-list" 
+  797  kubectl -n $SDWNS get services
+  798  kubectl -n $SDWNS get pods
+  799  osm ns-delete $NSID1
+  800  cd ..; helm package helm/wan
+  801  cd ..
+  802  cd sdw-lab-fork/
+  803  helm package helm/wanchart
+  804  helm repo index --url https://lbellido.github.io/sdw-lab-fork/ .
+  805  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  806  watch "osm ns-list" 
+  807  history | grep corpcpe 
+  808  ./sdedge1.sh 
+  809  ./sdwan1.sh 
+  810  kubectl -n $SDWNS get pods
+  811  kubectl -n $SDWNS get services
+  812  ./podsh deploy/helmchartrepo-wanchart-0000480450
+  813* kubectl -n $SDWNS get service 
+  814  kubectl -n $SDWNS get services deploy/helmchartrepo-wanchart-0000480450
+  815  kubectl -n $SDWNS get services helmchartrepo-wanchart-0000480450
+  816  kubectl -n $SDWNS get services helmchartrepo-wanchart-0000480450 -o
+  817  kubectl get --help
+  818  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "test.fullname" . }})
+  819  export NODE_PORT=$(kubectl get --namespace $SDWNS -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "helmchartrepo-wanchart-0000480450" . }})
+  820  export NODE_PORT=$(kubectl get --namespace $SDWNS -o jsonpath="{.spec.ports[0].nodePort}" service  "helmchartrepo-wanchart-0000480450"
+  821  export NODE_PORT=$(kubectl get --namespace $SDWNS -o jsonpath="{.spec.ports[0].nodePort}" service helmchartrepo-wanchart-0000480450)
+  822  exho $NODE_PORT
+  823  echo $NODE_PORT
+  824  TEST=deploy/helm
+  825  echo "${TEST/^deploy\//}
+  826  echo "${TEST/^deploy\//}"
+  827  echo "${TEST/deploy\//}"
+  828  osm ns-delete $NSID1
+  829  export NSID1=$(osm ns-create --ns_name sdedge1 --nsd_name sdedge --vim_account dummy_vim)
+  830  osm ns-list
+  831  ./sdedge1.sh 
+  832  ./sdwan1.sh 
+  833  history | grep microk8s
+  834  history > doc/history/history-20231109.txt 

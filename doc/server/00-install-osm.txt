@@ -1,0 +1,215 @@
+Instalación y arranque de un servidor OSM en ccn-lab5
+-----------------------------------------------------
+
+
+1 - Creacion de una imagen ubuntu 22.04 aumentada a 80GB
+--------------------------------------------------------
+
+- Aumentar tamaño imagen (https://techieandtravel.com/resize-a-qcow2-and-filesystem/):
+cd filesystems
+cp vnx_rootfs_kvm_ubuntu64-22.04-v026.qcow2 vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2
+qemu-img info vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2
+qemu-img resize vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2 +20G
+cp vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2 vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB-bk.qcow2
+sudo virt-resize --expand /dev/vda2 vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB-bk.qcow2 vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2
+qemu-img info vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2
+sudo virt-filesystems --long -h --all -a vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2
+cd ..
+
+2 - Arranque del escenario e instalación de OSM
+-----------------------------------------------
+
+- Copiamos la imagen y arrancamos el escenario que la monta en modo directo:
+cp filesystems/vnx_rootfs_kvm_ubuntu64-22.04-v026-80GB.qcow2 filesystems/vnx_rootfs_kvm_ubuntu64-22.04-v026-osm.qcow2
+vnx -f osm0.xml -t
+
+- Configuramos un NAT entre el bridge de OSM y el interfaz de salida para dar conectividad a Internet a la maquina virtual creada (solo tiene un interfaz eth1):
+vnx_config_nat br-osm enp1s0f1
+
+- Entramos como root:
+sed -i 's/#DNS=.*/DNS=1.1.1.1/' /etc/systemd/resolved.conf
+systemctl restart systemd-resolved
+ifconfig eth1 mtu 1350
+echo "   post-up ifconfig eth1 mtu 1350" >> /etc/network/interfaces
+
+- Aumentamos limites numero de ficheros/inodos:
+echo "fs.file-max = 4194304" >> /etc/sysctl.conf
+echo "fs.inotify.max_queued_events = 2097152" >> /etc/sysctl.conf
+echo "fs.inotify.max_user_instances = 2097152" >> /etc/sysctl.conf
+echo "fs.inotify.max_user_watches = 2097152" >> /etc/sysctl.conf
+sysctl --system
+
+- Creamos el usuario osmadmin y le damos permisos de root sin password:
+adduser osmadmin
+usermod -aG sudo osmadmin
+echo "osmadmin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+exit
+
+- Entramos como usuario osmadmin e instalamos OSM:
+mkdir osm
+cd osm
+wget https://osm-download.etsi.org/ftp/osm-16.0-sixteen/install_osm.sh
+chmod +x install_osm.sh
+./install_osm.sh 2>&1 | tee osm_install_log.txt
+
+- Comprobamos que todo arranca con:
+kubectl get all -A
+
+- Editamos el ingress de acceso al UI y al NBI:
+kubectl patch ingress -n osm ngui-ingress --patch '{"spec":{"ingressClassName":"nginx","rules":[{"host":"vosm.dit.upm.es","http":{"paths":[{"backend":{"service":{"name":"ng-ui","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}'
+kubectl patch ingress -n osm nbi-ingress --patch '{"spec":{"ingressClassName":"nginx","rules":[{"host":"vosm-nbi.dit.upm.es","http":{"paths":[{"backend":{"service":{"name":"nbi","port":{"number":9999}}},"path":"/","pathType":"Prefix"}]}}]}}'
+
+Nota: se puede hacer a mano con
+kubectl edit ingress -n osm ngui-ingress
+Cambiar:
+  - host: 10.11.13.1.nip.io
+Por:
+  - host: vosm.dit.upm.es
+
+- Cambiar permisos de este fichero cada vez que se entre con usuario osmadmin (se pierde el cambio al arrancar...):
+echo "sudo chmod +r /etc/rancher/k3s/k3s.yaml" >> /home/osmadmin/.bashrc
+
+- Redireccion del puerto del NBI:
+
+Para ver el puerto en el que está el servicio NBI:
+kubectl describe svc -n osm nbi
+
+sudo apt install socat
+sudo vi /etc/systemd/system/osm-nbi-forward.service
+---
+[Unit]
+Description=Socat Port Forwarding
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/socat TCP-LISTEN:9999,fork TCP:10.43.115.15:9999
+
+[Install]
+WantedBy=multi-user.target
+---
+
+sudo chmod 644 /etc/systemd/system/osm-nbi-forward.service
+sudo systemctl enable osm-nbi-forward
+sudo systemctl start osm-nbi-forward
+
+- Añadir entradas a /etc/hosts:
+sudo bash -c "echo '10.11.13.1 vosm.dit.upm.es vosm-nbi.dit.upm.es' >> /etc/hosts"
+
+- Definir OSM_HOSTNAME:
+echo "export OSM_HOSTNAME=vosm-nbi.dit.upm.es" >> /home/osmadmin/.bashrc
+
+- Parar el escenario:
+vnx -f osm0.xml --shutdown
+# Esperar a que se pare por completo (ver con virsh console XX)
+vnx -f osm0.xml --destroy
+
+3 - Arranque del escenario en producción
+----------------------------------------
+
+- Arrancamos el escenario en modo cow y con el directorio compartido:
+vnx -f osm.xml --create
+
+- Para acceder al OSM:
+ssh osmadmin@vosm
+ssh osmadmin@10.11.13.1
+
+- Creacion de usuarios:
+bin/create-users-rdsv.sh
+
+Nota:
+$ cat bin/create-users-rdsv.sh
+#!/bin/bash
+
+for i in {A..Z}; do
+
+    echo "-- Creating user/project: rdsv$i/rprj$i..."
+    osm project-create rprj$i
+    osm user-create rdsv$i --password Dummy1-$i --project-role-mappings rprj$i,project_admin
+    osm user-update rdsv$i --new-password Xxxxx1-$i
+
+done
+
+4 - Configuración de los clientes para acceder al OSM
+-----------------------------------------------------
+
+- Establecer tunel
+
+- Añadir entrada al /etc/hosts
+10.11.13.1 vosm.dit.upm.es vosm-nbi.dit.upm.es
+
+- Poner variables de entorno:
+export OSM_HOSTNAME=vosm-nbi.dit.upm.es
+export OSM_USER=rdsvA
+export OSM_PASSWORD=Xxxxx1-A
+export OSM_PROJECT=rprjA
+
+
+5 - Notas adicionales
+---------------------
+
+Notas patch ingress:
+
+Fichero ingress-patch:
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: vosm.dit.upm.es
+    http:
+      paths:
+      - backend:
+          service:
+            name: ng-ui
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+
+Convertido a JSON (comando yq -o=json /tmp/ingress-patch.yaml ):
+{
+  "spec": {
+    "ingressClassName": "nginx",
+    "rules": [
+      {
+        "host": "vosm.dit.upm.es",
+        "http": {
+          "paths": [
+            {
+              "backend": {
+                "service": {
+                  "name": "ng-ui",
+                  "port": {
+                    "number": 80
+                  }
+                }
+              },
+              "path": "/",
+              "pathType": "Prefix"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+
+En una sola línea:
+yq -o=json --indent=0 /tmp/ingress-patch.yaml
+
+{"spec":{"ingressClassName":"nginx","rules":[{"host":"vosm.dit.upm.es","http":{"paths":[{"backend":{"service":{"name":"ng-ui","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}]}}
+
+
+Info mostrada al final de la instalacion de OSM:
+
+NAME: osm
+LAST DEPLOYED: Mon Nov  4 16:12:15 2024
+NAMESPACE: osm
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  export OSM_GUI_URL=$(kubectl get --namespace osm -o jsonpath="{.spec.rules[0].host}" ingress ngui-ingress)
+  echo "OSM UI: $OSM_GUI_URL"
+  export OSM_HOSTNAME=$(kubectl get --namespace osm -o jsonpath="{.spec.rules[0].host}" ingress nbi-ingress)
+  echo "OSM_HOSTNAME (for osm client): $OSM_HOSTNAME"
+2. Get Grafana credentials for admin user using below command.
+  kubectl -n osm  get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo

@@ -1,0 +1,296 @@
+    1  sudo snap install microk8s --classic
+    2  microk8s
+    3  microk8s status
+    4  sudo usermod -a -G microk8s upm
+    5  ls -al
+    6  microk8s
+    7  microk8s status
+    8  sudo chown -R upm ~/.kube
+    9  mkdir sudo chown -R upm ~/.kube
+   10  mkdir ~/.kube
+   11  sudo chown -R upm ~/.kube
+   12  newgrp microk8s
+   13  microk8s status --wait-ready
+   14  microk8s enable registryOSM
+   15  curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+   16  sudo apt-get install apt-transport-https --yes
+   17  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+   18  sudo apt-get update
+   19  sudo apt-get install helm
+   20  kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml
+   21  microk8s kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml
+   22  sudo newgrp microk8s
+   23  microk8s kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml
+   24  sudo microk8s kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml
+   25  microk8s kubectl get --all-namespace
+   26  microk8s kubectl get all --all-namespaces
+   27  cd Desktop/
+   28  git pull https://github.com/educaredes/sdedge-ns.git
+   29  git clone https://github.com/educaredes/sdedge-ns.git
+   30  git checkout -b only-helm
+   31  cd sdedge-ns/
+   32  git checkout -b only-helm
+   33  cd bin
+   34  ls
+   35  ls pre*
+   36  cd ..
+   37  ls
+   38  git branches
+   39  git branch
+   40  git fetch
+   41  git branch -v -a
+   42  git branch -d only-helm
+   43  git branch -D only-helm
+   44  git switch main
+   45  git branch -D only-helm
+   46  git switch only-helm
+   47  cd bin
+   48  ls -al
+   49  ./prepare-k8slab 
+   50  cd ..
+   51  helm
+   52  he
+   53  helm install access1 accesschart-0.1.0.tgz 
+   54  kubectl 
+   55  kubectl
+   56  microk8s status
+   57  helm install access1 accesschart-0.1.0.tgz 
+   58  helm install access1 -f accesschart-0.1.0.tgz 
+   59  helm install  -f accesschart-0.1.0.tgz  access1
+   60  helm install access1 ./accesschart-0.1.0.tgz 
+   61  cd Desktop/sdedge-ns/
+   62  helm install access1 ./accesschart-0.1.0.tgz 
+   63  sudo microk8s config > ~/.kube/config 
+   64  helm install access1 ./accesschart-0.1.0.tgz 
+   65  helm install cpe1 ./cpe-0.1.0.tgz 
+   66  helm install corpcpe1 ./corpcpe-0.1.0.tgz 
+   67  helm install cpe1 ./cpechart-0.1.0.tgz 
+   68  echo $SDWNS
+   69  kubectl get-namespaces
+   70  kubectl get-namespace
+   71  kubectl get namespace --all
+   72  kubectl get namespaces
+   73  helm uninstall cpe1
+   74  helm uninstall access1
+   75  helm -h | grep namespace
+   76  helm install -n rdsv cpe1 ./cpechart-0.1.0.tgz 
+   77  helm install -n rdsv access1 ./accesschart-0.1.0.tgz 
+   78  vi cpe1.sh 
+   79  export SDWNS=rdsv
+   80  vi cpe1.sh 
+   81  vi osm_corpcpe_start.sh 
+   82  kubectl -n rdsv get deployments
+   83  kubectl -n rdsv get pods
+   84  kubectl describe pods 
+   85  kubectl -n rdsv describe pods 
+   86  helm list
+   87  helm repo update
+   88  helm repo add bitnami https://charts.bitnami.com/bitnami
+   89  helm repo update
+   90  helm install bitnamy/mysql --generate-name
+   91  helm install bitnami/mysql --generate-name
+   92  helm list
+   93  helm uninstall mysql-1729966893
+   94  helm status mysql-1729966893
+   95  helm status -n rdsv 
+   96  helm status -n rdsv access1
+   97  kubectl -n rdsv get pods
+   98  helm install -n rdsv bitnami/mysql --generate-name
+   99  kubectl -n rdsv get pods
+  100  helm show chart accesschart-0.1.0.tgz 
+  101  ls -al
+  102  helm uninstall -n rdsv cpe1 access1
+  103  kubectl -n rdsv get pods
+  104  kubectl -n rdsv get deployments
+  105  kubectl -n rdsv get pods
+  106  kubectl -n rdsv get deployment
+  107  kubectl -n rdsv get deployments
+  108  kubectl -n rdsv get pods
+  109  kubectl -n rdsv delete pod access1-accesschart-68f86f78cb-gpnvm
+  110  kubectl -n rdsv get pods
+  111  kubectl -n rdsv get services
+  112  helm list -n rdsv
+  113  chmod g-w /home/upm/.kube/config 
+  114  helm list -n rdsv
+  115  chmod og-r /home/upm/.kube/config 
+  116  helm list -n rdsv
+  117  helm uninstall mysql-1729967092
+  118  helm uninstall -n rdsv mysql-1729967092
+  119  kubectl -n rdsv get pods
+  120  kubectl -n rdsv delete  pod access1-accesschart-68f86f78cb-gpnvm --now
+  121  kubectl -n rdsv delete  pod access1-accesschart-68f86f78cb-gpnvm ----force
+  122  kubectl -n rdsv delete  pod access1-accesschart-68f86f78cb-gpnvm --force
+  123  kubectl -n rdsv get pods
+  124  kubectl -n rdsv delete  pod cpe1-cpechart-c7597f794-h2k86 --force
+  125  rm accesschart-0.1.0.tgz 
+  126  rm cpechart-0.1.0.tgz 
+  127  helm package helm/accesschart 
+  128  helm install -n rdsv access1 ./accesschart-0.1.0.tgz 
+  129  kubectl -n rdsv get deployments
+  130  kubectl -n rdsv get pods
+  131  cd helm/
+  132  ls
+  133  cd accesschart/
+  134  ls -al
+  135  grep educaredes *
+  136  kubectl -n rdsv get pods
+  137  vi values.yaml 
+  138  helm uninstall access1
+  139  helm uninstall -n rdsv access1
+  140  kubectl -n rdsv delete  pod access1-accesschart-68f86f78cb-gpnvm --force
+  141  kubectl -n rdsv get pods
+  142  kubectl -n rdsv delete  pod access1-accesschart-68f86f78cb-sn2b4 --force
+  143  kubectl -n rdsv get pods
+  144  cd ..
+  145  cd cpechart/
+  146  vi values.yaml 
+  147  cd ..
+  148  grep -R docker *
+  149  cd ..
+  150  rm accesschart-0.1.0.tgz 
+  151  ls -al
+  152  rm wanchart-0.1.0.tgz 
+  153  vi helm/wanchart/values.yaml 
+  154  helm package helm/accesschart
+  155  helm install -n rdsv access1 ./accesschart-0.1.0.tgz 
+  156  kubectl -n rdsv get deployments
+  157  watch kubectl -n rdsv get deployments
+  158  watch microk8s kubectl -n rdsv get deployments
+  159  watch kubectl -n rdsv get all
+  160  watch microk8s kubectl -n rdsv get all
+  161  docker
+  162  docker images
+  163  watch microk8s kubectl -n rdsv get all
+  164  watch microk8s kubectl -n rdsv get pods
+  165  helm list
+  166  helm -n rdsv list
+  167  helm dependency list ./accesschart-0.1.0.tgz 
+  168  helm install access2 accesschart-0.1.0.tgz --dry-run --debug
+  169  helm list
+  170  helm -n rdsv list
+  171  helm -n rdsv uninstall access1
+  172  watch microk8s kubectl -n rdsv get all
+  173  kubectl -n rdsv get pods
+  174  watch microk8s kubectl -n rdsv delete pod access1-accesschart-68f86f78cb-b5zph
+  175  watch microk8s kubectl -n rdsv delete pod access1-accesschart-68f86f78cb-b5zph --force
+  176  microk8s kubectl -n rdsv delete pod access1-accesschart-68f86f78cb-b5zph --force
+  177  rm accesschart-0.1.0.tgz 
+  178  ls -al
+  179  cd helm
+  180  ls
+  181  cd accesschart/
+  182  ls
+  183  cd ../ejemplo/
+  184  less values.yaml 
+  185  cd ..
+  186  helm package helm/ejemplo
+  187  helm install ej1 ejemplo-0.1.0.tgz 
+  188  helm list
+  189  kubectl get pods
+  190  helm uninstall ex1
+  191  helm uninstall ej1
+  192  kubectl get pods
+  193  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  194  kubectl -n rdsv get pods
+  195  helm -n uninstall ej1
+  196  helm -n rdsv uninstall ej1
+  197  rm ejemplo-0.1.0.tgz 
+  198  cd helm/ejemplo/
+  199  ls
+  200  cd ..
+  201  cp -R ejemplo/ ejemplo-bak
+  202  cd ejemplo
+  203  ls
+  204  vi values.yaml ../accesschart/values.yaml 
+  205  cd ..
+  206  helm package helm/ejemplo
+  207  cd ..
+  208  helm package helm/ejemplo
+  209  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  210  kubectl -n rdsv get pods
+  211* 
+  212  kubectl -n rdsv get pods
+  213  vi helm/ejemplo/values.yaml 
+  214  helm package helm/ejemplo
+  215  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  216  kubectl -n rdsv get pods
+  217  kubectl get events --field-selector involvedObject.name=ej1-ejemplo-54f66c4d5c-4nc72
+  218  kubectl -n rdsv get events --field-selector involvedObject.name=ej1-ejemplo-54f66c4d5c-4nc72
+  219  helm -n rdsv uninstall ej1
+  220  kubectl -n rdsv get pods
+  221  vi helm/ejemplo/values.yaml 
+  222  helm package helm/ejemplo
+  223  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  224  kubectl -n rdsv get pods
+  225  kubectl -n rdsv get events --field-selector involvedObject.name=ej1-ejemplo-54f66c4d5c-9wm58
+  226  vi helm/ejemplo/values.yaml 
+  227  helm -n rdsv uninstall ej1
+  228  rm ejemplo-0.1.0.tgz 
+  229  helm list
+  230  helm package helm/ejemplo
+  231  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  232  kubectl -n rdsv get pods
+  233  kubectl -n rdsv get events --field-selector involvedObject.name=ej1-ejemplo-54f66c4d5c-77t7f
+  234  helm -n rdsv uninstall ej1
+  235  vi helm/ejemplo/values.yaml 
+  236  helm package helm/ejemplo
+  237  vi helm/ejemplo/values.yaml 
+  238  helm package helm/ejemplo
+  239  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  240  kubectl -n rdsv get pods
+  241  kubectl -n rdsv get events --field-selector involvedObject.name=ej1-ejemplo-559d5f74c6-h5d6g
+  242  helm -n rdsv uninstall ej1
+  243  vi helm/ejemplo/values.yaml 
+  244  grep 16 helm/ejemplo/values.yaml 
+  245  grep -R  16 helm/ejemplo 
+  246  vi helm/ejemplo/Chart.yaml 
+  247  helm package helm/ejemplo
+  248  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  249  kubectl -n rdsv get pods
+  250  kubectl -n rdsv get events --field-selector involvedObject.name=ej1-ejemplo-b7bfb6fbc-64vbt
+  251  helm -n rdsv uninstall ej1
+  252  vi helm/ejemplo/Chart.yaml 
+  253  helm package helm/ejemplo
+  254  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  255  kubectl -n rdsv get pods
+  256  kubectl -n rdsv get events --field-selector involvedObject.name=ej1-ejemplo-6c6996b574-79ql4
+  257  kubectl -n rdsv get pods
+  258  vi helm/ejemplo/values.yaml 
+  259  vi helm/ejemplo/Chart.yaml 
+  260  vi helm/ejemplo/templates/service.yaml 
+  261  vi helm/ejemplo/templates/deployment.yaml 
+  262  vi helm/ejemplo/values.yaml 
+  263  vi helm/accesschart/templates/deployment.yaml 
+  264  kubectl -n rdsv get pods
+  265  helm -n rdsv uninstall ej1
+  266  kubectl -n rdsv get pods
+  267  helm package helm/ejemplo
+  268  helm -n rdsv install ej1 ejemplo-0.1.0.tgz 
+  269  kubectl -n rdsv get pods
+  270  ls
+  271  history > history.txt
+
+
+# Instalar helm 
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+# Instalar multus cni
+kubectl apply -f https://raw.githubusercontent.com/k8snetworkplumbingwg/multus-cni/master/deployments/multus-daemonset.yml
+
+# Instalar ovs cni
+git clone https://github.com:k8snetworkplumbingwg/ovs-cni.git && cd ovs-cni
+kubectl apply -f examples/ovs-cni.yml
+
+# Cambiar el namespace
+https://www.baeldung.com/ops/kubernetes-switch-namespaces
+
+kubectl config set-context --current --namespace=<namespace-name>
+
+eso cambia el contexto utilizado, el contexto que se utiliza se puede ver
+ poniendo el modo depuración a 6 en kubectl  
+
+ kubectl -v6 get pods 
