@@ -1,0 +1,1 @@
+6793ed5ea7972bf0f77f5e92659761b9c5fc2b072e3c71604584df0f328ded25  ctrlknf_vnfd/ctrlknf_vnfd.yaml

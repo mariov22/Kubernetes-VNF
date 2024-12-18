@@ -21,7 +21,7 @@ set -u # to verify variables are defined
 : $CUSTPREFIX
 : $VNFTUNIP
 : $VCPEPUBIP
-: $VCPEGW
+#: $VCPEGW
 
 if [[ ! $VACC =~ "-accesschart"  ]]; then
    echo ""       
@@ -35,8 +35,15 @@ if [[ ! $VCPE =~ "-cpechart"  ]]; then
    exit 1
 fi
 
+#if [[ ! $VCTRL =~ "ctrlchart" ]]; then
+#   echo ""
+#   echo "ERROR: incorrect <ctrl_deployment_id>: $VCTRL"
+#   exit 1
+#fi
+
 ACC_EXEC="$KUBECTL exec -n $SDWNS $VACC --"
 CPE_EXEC="$KUBECTL exec -n $SDWNS $VCPE --"
+#CTRL_EXEC="$KUBECTL exec -n $SDWNS $VTCRL --"
 
 # IP privada por defecto para el vCPE
 VCPEPRIVIP="192.168.255.254"
@@ -54,10 +61,14 @@ echo "IPACCESS = $IPACCESS"
 IPCPE=`$CPE_EXEC hostname -I | awk '{print $1}'`
 echo "IPCPE = $IPCPE"
 
+#IPCTRL=`$CTRL_EXEC hostname -I | awk '{print $1}'`
+#echo "IPCTRL = $IPCTRL"
+
 ## 2. Iniciar el Servicio OpenVirtualSwitch en cada VNF:
 echo "## 2. Iniciar el Servicio OpenVirtualSwitch en cada VNF"
 $ACC_EXEC service openvswitch-switch start
 $CPE_EXEC service openvswitch-switch start
+#$CTRL_EXEC service openvswitch-switch start
 
 ## 3. En VNF:access agregar un bridge y configurar IPs y rutas
 echo "## 3. En VNF:access agregar un bridge y configurar IPs y rutas"

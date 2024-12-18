@@ -1,0 +1,18 @@
+vnfd:
+  description: KNF ctrl
+  df:
+  - id: default-df
+  ext-cpd:
+  - id: mgmt-ext
+    k8s-cluster-net: mgmtnet
+  id: ctrlknf
+  k8s-cluster:
+    nets:
+    - id: mgmtnet
+  kdu:
+  - name: repos
+    helm-chart: sdedge-ns-repo/ctrlchart
+  mgmt-cp: mgmt-ext
+  product-name: ctrlknf
+  provider: GUI
+  version: '1.0'

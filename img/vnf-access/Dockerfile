@@ -17,4 +17,5 @@ RUN apt-get update \
     nano \
     vim
 
+COPY README.txt README.txt
 

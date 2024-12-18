@@ -23,7 +23,7 @@ echo "## 0. Instalación de las vnfs"
 
 echo "### 0.1 Limpieza (ignorar errores)"
 
-for vnf in access cpe wan
+for vnf in access cpe wan ctrl
 do
   helm -n $SDWNS uninstall $vnf$NETNUM 
 done
@@ -34,10 +34,10 @@ echo ''
 echo "### 0.2 Creación de contenedores"
 
 chart_suffix="chart-0.1.0.tgz"
-for vnf in access cpe wan
+for vnf in access cpe wan ctrl
 do
   echo '#### $vnf$NETNUM'
-  helm -n $SDWNS install $vnf$NETNUM $vnf$chart_suffix
+  helm -n $SDWNS install $vnf$NETNUM http://127.0.0.1:8080/$vnf$chart_suffix
 done
 
 for i in {1..30}; do echo -n "."; sleep 1; done
@@ -46,6 +46,7 @@ echo ''
 export VACC="deploy/access$NETNUM-accesschart"
 export VCPE="deploy/cpe$NETNUM-cpechart"
 export VWAN="deploy/wan$NETNUM-wanchart"
+export VCTRL="deploy/ctrl$NETNUM-ctrlchart"
 
 ./start_corpcpe.sh
 ./start_sdedge.sh
@@ -56,3 +57,4 @@ echo "K8s deployments para la red $NETNUM:"
 echo $VACC
 echo $VCPE
 echo $VWAN
+echo $VCTRL

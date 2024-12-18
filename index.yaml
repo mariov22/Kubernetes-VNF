@@ -3,34 +3,45 @@ entries:
   accesschart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-11-11T19:58:13.466785+01:00"
+    created: "2024-12-17T18:12:53.567208527+01:00"
     description: A Helm chart for Kubernetes
-    digest: bac6b557c89df4545a9c99efb09982a65b36eb873cabba035c06e1a540bd0e93
+    digest: 089eb448be7b3ccd867fdddc7fde3e88f1ded74840c002c215503d7aa1a62d1c
     name: accesschart
     type: application
     urls:
-    - https://educaredes.github.io/sdedge-ns/accesschart-0.1.0.tgz
+    - http://127.0.0.1/accesschart-0.1.0.tgz
     version: 0.1.0
   cpechart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-11-11T19:58:13.467056+01:00"
+    created: "2024-12-17T18:12:53.567413584+01:00"
     description: A Helm chart for Kubernetes
-    digest: 36f3ddd1aa28200bf3ea25a17ecefcbccdb318cd72456ab830d2e7a95c249c06
+    digest: a7b5886912bd588b121e3003828fca940310ca56b8c1f559ab8a8d7c494df384
     name: cpechart
     type: application
     urls:
-    - https://educaredes.github.io/sdedge-ns/cpechart-0.1.0.tgz
+    - http://127.0.0.1/cpechart-0.1.0.tgz
+    version: 0.1.0
+  ctrlchart:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-12-17T18:12:53.567606286+01:00"
+    description: A Helm chart for Kubernetes
+    digest: 2f1da034905c95d80d2c9a03c954c6a244e9d376e2675b1c4b833ea248971831
+    name: ctrlchart
+    type: application
+    urls:
+    - http://127.0.0.1/ctrlchart-0.1.0.tgz
     version: 0.1.0
   wanchart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-11-11T19:58:13.467349+01:00"
+    created: "2024-12-17T18:12:53.567796072+01:00"
     description: A Helm chart for Kubernetes
-    digest: 734ab1e78af772af4f29ff00abe47c84afaac515db872cf06e60984be3855840
+    digest: 8042e94dfb71ed53ec4faa623fa8b6ebe20b991f5084df015dc6a46925d5d57d
     name: wanchart
     type: application
     urls:
-    - https://educaredes.github.io/sdedge-ns/wanchart-0.1.0.tgz
+    - http://127.0.0.1/wanchart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-11-11T19:58:13.466265+01:00"
+generated: "2024-12-17T18:12:53.566894438+01:00"

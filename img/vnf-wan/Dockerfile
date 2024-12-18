@@ -12,5 +12,7 @@ RUN	apt-get update && apt-get install -y \
     python-pip \
     git
 
+COPY README.txt README.txt
+
 #RUN pip install -r ryu/tools/optional-requires
 RUN git clone https://github.com/martimy/flowmanager

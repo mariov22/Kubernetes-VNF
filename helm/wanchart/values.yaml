@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: educaredes/vnf-wan
+  repository: mariovicente/vnf-wan
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"

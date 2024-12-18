@@ -5,6 +5,8 @@ RUN apt-get update \
     && apt-get install -y \
     iptables 
 
+COPY README.txt README.txt
+
 COPY vnx_config_nat vnx_config_nat
 
 RUN chmod +x vnx_config_nat
