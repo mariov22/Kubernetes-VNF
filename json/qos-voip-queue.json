@@ -1,0 +1,1 @@
+{"port_name": "axswan", "type": "linux-htb", "max_rate": "3600000", "queues": [{"min_rate": "2400000"}]}

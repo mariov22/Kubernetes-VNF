@@ -24,7 +24,7 @@ set -u # to verify variables are defined
 : $VNFTUNIP
 : $VCPEPUBIP
 : $VCPEGW
-#: $VCTRL
+: $VCTRL
 
 if [[ ! $VACC =~ "-accesschart"  ]]; then
     echo ""       
@@ -44,18 +44,18 @@ if [[ ! $VWAN =~ "-wanchart"  ]]; then
     exit 1
 fi
 
-#if [[ ! $VCTRL =~ "-ctrlchart"  ]]; then
-#    echo ""       
-#    echo "ERROR: incorrect <ctrl_deployment_id>: $VCTRL"
-#    exit 1
-#fi
+if [[ ! $VCTRL =~ "-ctrlchart"  ]]; then
+    echo ""       
+    echo "ERROR: incorrect <ctrl_deployment_id>: $VCTRL"
+    exit 1
+fi
 
 
 
 ACC_EXEC="$KUBECTL exec -n $SDWNS $VACC --"
 CPE_EXEC="$KUBECTL exec -n $SDWNS $VCPE --"
 WAN_EXEC="$KUBECTL exec -n $SDWNS $VWAN --"
-#CTRL_EXEC="$KUBECTL exec -n $SDWNS $VCTRL --"
+CTRL_EXEC="$KUBECTL exec -n $SDWNS $VCTRL --"
 
 # IP privada por defecto para el vCPE
 VCPEPRIVIP="192.168.255.254"
@@ -76,13 +76,12 @@ echo "IPCPE = $IPCPE"
 IPWAN=`$WAN_EXEC hostname -I | awk '{print $1}'`
 echo "IPWAN = $IPWAN"
 
-#IPCTRL=`$CTRL_EXEC hostname -I | awk '{print $1}'`
-#echo "IPCTRL = $IPCTRL"
+IPCTRL=`$CTRL_EXEC hostname -I | awk '{print $1}'`
+echo "IPCTRL = $IPCTRL"
 
 ## 2. Iniciar el Servicio OpenVirtualSwitch en wan VNF:
 echo "## 2. Iniciar el Servicio OpenVirtualSwitch en wan VNF"
 $WAN_EXEC service openvswitch-switch start
-#$CTRL_EXEC service openvswitch-switch start
 
 ## 3. En VNF:access agregar un bridge y sus vxlans
 echo "## 3. En VNF:access agregar un bridge y sus vxlan"
@@ -102,3 +101,4 @@ $WAN_EXEC ovs-vsctl add-port brwan axswan
 #in the following, it should be net1 (only one MplsNet)
 $WAN_EXEC ovs-vsctl add-port brwan net1
 $WAN_EXEC ifconfig axswan up
+

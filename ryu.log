@@ -1,0 +1,101 @@
+loading app flowmanager/flowmanager.py
+loading app ryu.app.qos_simple_switch_13
+loading app ryu.app.rest_qos
+loading app ryu.app.rest_conf_switch
+loading app ryu.app.ofctl_rest
+loading app ryu.topology.switches
+loading app ryu.controller.ofp_handler
+instantiating app None of DPSet
+creating context dpset
+creating context wsgi
+instantiating app None of ConfSwitchSet
+creating context conf_switch
+instantiating app ryu.app.rest_conf_switch of ConfSwitchAPI
+instantiating app ryu.controller.ofp_handler of OFPHandler
+instantiating app ryu.app.rest_qos of RestQoSAPI
+instantiating app ryu.app.qos_simple_switch_13 of SimpleSwitch13
+instantiating app flowmanager/flowmanager.py of FlowManager
+Created flowmanager
+instantiating app ryu.topology.switches of Switches
+instantiating app ryu.app.ofctl_rest of RestStatsApi
+(192) wsgi starting up on http://0.0.0.0:8080
+[QoS][INFO] dpid=0000000000000001: Join qos switch.
+[QoS][INFO] dpid=0000000000000002: Join qos switch.
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:16 1
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:16 1
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 1 5a:7d:c2:ca:a1:e4 33:33:00:00:00:02 3
+[QoS][INFO] dpid=0000000000000003: Join qos switch.
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 1 5a:7d:c2:ca:a1:e4 33:33:00:00:00:02 3
+packet in 3 5a:7d:c2:ca:a1:e4 33:33:00:00:00:02 2
+(192) accepted ('10.0.1.1', 27316)
+10.0.1.1 - - [26/Jan/2025 15:53:49] "POST /stats/flowentry/add HTTP/1.1" 200 115 0.027884
+(192) accepted ('10.0.1.1', 44715)
+10.0.1.1 - - [26/Jan/2025 15:53:49] "POST /stats/flowentry/add HTTP/1.1" 200 115 0.000783
+(192) accepted ('10.0.1.1', 1409)
+10.0.1.1 - - [26/Jan/2025 15:53:49] "POST /stats/flowentry/add HTTP/1.1" 200 115 0.000916
+(192) accepted ('10.0.1.1', 27583)
+10.0.1.1 - - [26/Jan/2025 15:53:49] "POST /stats/flowentry/add HTTP/1.1" 200 115 0.000904
+(192) accepted ('10.0.1.1', 42869)
+10.0.1.1 - - [26/Jan/2025 15:53:49] "POST /stats/flowentry/add HTTP/1.1" 200 115 0.000948
+(192) accepted ('10.0.1.1', 17329)
+10.0.1.1 - - [26/Jan/2025 15:53:49] "POST /stats/flowentry/add HTTP/1.1" 200 115 0.001091
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+(192) accepted ('10.0.1.1', 57473)
+10.0.1.1 - - [26/Jan/2025 15:54:23] "GET /home/ HTTP/1.1" 200 1162 0.225744
+packet in 3 0e:3a:7f:95:ac:73 33:33:00:00:00:02 2
+packet in 2 72:56:6e:2c:a3:6a 33:33:00:00:00:02 1
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/css/style.css?v2 HTTP/1.1" 200 4550 0.078730
+(192) accepted ('10.0.1.1', 25369)
+(192) accepted ('10.0.1.1', 36969)
+(192) accepted ('10.0.1.1', 49720)
+(192) accepted ('10.0.1.1', 27683)
+(192) accepted ('10.0.1.1', 4056)
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/css/cards.css?v2 HTTP/1.1" 200 2652 0.001586
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/css/table.css?v2 HTTP/1.1" 200 2582 0.017449
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/css/menu.css?v2 HTTP/1.1" 200 1688 0.003993
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/js/jquery-3.7.1.min.js HTTP/1.1" 200 87674 0.008752
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/js/main.js?v2 HTTP/1.1" 200 2915 0.011106
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/js/cards.js?v2 HTTP/1.1" 200 3938 0.006551
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/js/mainmenu.js HTTP/1.1" 200 1986 0.005615
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/js/modules.js?v2 HTTP/1.1" 200 6651 0.009311
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/css/colors.css HTTP/1.1" 200 1289 0.078646
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/img/favicon.ico HTTP/1.1" 200 10371 0.031153
+10.0.1.1 - - [26/Jan/2025 15:54:24] "GET /home/img/switch.svg HTTP/1.1" 200 2219 0.000854
+10.0.1.1 - - [26/Jan/2025 15:54:25] "GET /data?list=switches HTTP/1.1" 200 183 0.000787
+10.0.1.1 - - [26/Jan/2025 15:54:25] "GET /data?portstat=1 HTTP/1.1" 200 1136 0.023654
+10.0.1.1 - - [26/Jan/2025 15:54:25] "GET /data?switchdesc=1 HTTP/1.1" 200 278 0.023254
+10.0.1.1 - - [26/Jan/2025 15:54:25] "GET /data?portdesc=1 HTTP/1.1" 200 813 0.025759
+10.0.1.1 - - [26/Jan/2025 15:54:25] "GET /data?flowsumm=1 HTTP/1.1" 200 222 0.025366
+10.0.1.1 - - [26/Jan/2025 15:54:25] "GET /data?tablestat=1 HTTP/1.1" 200 17590 0.190118
+10.0.1.1 - - [26/Jan/2025 15:54:34] "GET /home/flows.html HTTP/1.1" 200 1340 0.042272
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/css/style.css?v2 HTTP/1.1" 200 4550 0.000410
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/css/table.css?v2 HTTP/1.1" 200 2582 0.000294
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/css/frames.css?v1 HTTP/1.1" 200 3805 0.021425
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/css/tabs.css?v1 HTTP/1.1" 200 1694 0.020181
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/css/menu.css?v2 HTTP/1.1" 200 1688 0.000972
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/css/colors.css HTTP/1.1" 200 1289 0.000456
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/js/mainmenu.js HTTP/1.1" 200 1986 0.000351
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/js/jquery-3.7.1.min.js HTTP/1.1" 200 87674 0.000392
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/js/flowtables.js?v2 HTTP/1.1" 200 3754 0.000801
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/js/common.js?v2 HTTP/1.1" 200 24001 0.000952
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/img/switch.svg HTTP/1.1" 200 2219 0.000617
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /data?list=switches HTTP/1.1" 200 183 0.000455
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /status?status=flows&dpid=1 HTTP/1.1" 200 2057 0.017511
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /status?status=flows&dpid=3 HTTP/1.1" 200 599 0.019727
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /status?status=flows&dpid=2 HTTP/1.1" 200 599 0.023262
+10.0.1.1 - - [26/Jan/2025 15:54:35] "GET /home/img/all_icons.svg HTTP/1.1" 200 3671 0.029518
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 3 5a:7d:c2:ca:a1:e4 33:33:00:00:00:02 2
+packet in 3 7a:1c:97:97:2a:56 33:33:00:00:00:02 1
+packet in 2 7a:1c:97:97:2a:56 33:33:00:00:00:02 1
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 3 5a:7d:c2:ca:a1:e4 33:33:00:00:00:02 2
+packet in 2 72:56:6e:2c:a3:6a 33:33:00:00:00:02 1
+packet in 3 0e:3a:7f:95:ac:73 33:33:00:00:00:02 2
+packet in 2 ae:87:94:75:55:bd 33:33:00:00:00:02 1
+packet in 3 5a:7d:c2:ca:a1:e4 33:33:00:00:00:02 2
+command terminated with exit code 137

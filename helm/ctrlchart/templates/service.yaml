@@ -6,10 +6,21 @@ metadata:
     {{- include "ctrlchart.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
+#  ports:
+#    - port: {{ .Values.service.port }}
+#      targetPort: http
+#      protocol: TCP
+#      name: http
+
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
+    - port: {{ .Values.service.internalPort }}
+      targetPort: {{ .Values.service.targetPort }}
       protocol: TCP
       name: http
+    - port: 6633
+      targetPort: 6633
+      protocol: TCP
+      name: controller
+
   selector:
     {{- include "ctrlchart.selectorLabels" . | nindent 4 }}
