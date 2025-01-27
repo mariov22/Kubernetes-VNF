@@ -10,6 +10,9 @@ cd bin
 source ~/.bashrc
 echo $SDWNS
 
+#Instalar paquetes en la imagen VNX
+sudo vnx --modify-rootfs /usr/share/vnx/filesystems/vnx_rootfs_lxc_ubuntu64-20.04-v025-vnxlab/
+
 #Levantar el escenario VNX
 
 cd ~/shared/SDNV/PRACTICA_FINAL/Kubernetes-VNF/vnx
@@ -25,6 +28,8 @@ helm package ~/shared/SDNV/PRACTICA_FINAL/Kubernetes-VNF/helm/wanchart
 helm package ~/shared/SDNV/PRACTICA_FINAL/Kubernetes-VNF/helm/ctrlchart
 helm repo index --url http://127.0.0.1/ .
 docker run --restart always --name helm-repo -p 8080:80 -v ~/helm-files:/usr/share/nginx/html:ro -d nginx
+
+source ~/.bashrc
 
 #cd bin 
 #./prepare-k8slab

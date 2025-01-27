@@ -122,6 +122,10 @@ SPAIN
        # Change interfaces MTU
        ifconfig eth1 mtu 1400
        sed -i -e '/iface eth1 inet static/a \   mtu 1400' /etc/network/interfaces
+       sudo systemctl enable arpwatch
+       sudo systemctl start arpwatch@eth1
+       sudo systemctl start arpwatch@eth2
+       sudo systemctl start arpwatch@eth3
     </exec>
     <forwarding type="ip" />
     <route type="ipv4" gw="10.20.0.2">10.20.2.0/24</route>
@@ -142,6 +146,10 @@ SPAIN
        # Change interfaces MTU
        ifconfig eth1 mtu 1400
        sed -i -e '/iface eth1 inet static/a \   mtu 1400' /etc/network/interfaces
+       sudo systemctl enable arpwatch
+       sudo systemctl start arpwatch@eth1
+       sudo systemctl start arpwatch@eth2
+       sudo systemctl start arpwatch@eth3
     </exec>
     <forwarding type="ip" />
     <route type="ipv4" gw="10.20.0.1">10.20.1.0/24</route>

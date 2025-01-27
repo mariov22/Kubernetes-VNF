@@ -84,6 +84,7 @@ $CPE_EXEC ifconfig sr1sr2 up
 echo "## 3. En VNF:wan arrancar controlador SDN"
 #$CTRL_EXEC /usr/local/bin/ryu-manager flowmanager/flowmanager.py ryu.app.rest_qos ryu.app.simple_switch_13 ryu.app.rest_conf_switch ryu.app.ofctl_rest --wsapi-port 8000 2>&1 | tee ryu.log &
 #$CTRL_EXEC python ./ryu/setup.py install
+$CTRL_EXEC sh -c "cd ryu && python ./setup.py install"
 $CTRL_EXEC /usr/local/bin/ryu-manager flowmanager/flowmanager.py ryu.app.qos_simple_switch_13 ryu.app.rest_qos ryu.app.rest_conf_switch ryu.app.ofctl_rest &  
 
 ## 4. En VNF:wan activar el modo SDN del conmutador y crear vxlan
@@ -139,6 +140,11 @@ curl -X POST -d @json/broadcast-from-axs.json $RYU_ADD_URL
 curl -X POST -d @json/from-mpls.json $RYU_ADD_URL
 curl -X POST -d @json/to-voip-gw.json $RYU_ADD_URL
 curl -X POST -d @json/sdedge$NETNUM/to-voip.json $RYU_ADD_URL
+curl -X POST -d @json/access-to-wan.json $RYU_ADD_URL
+curl -X POST -d @json/cpe-to-wan.json $RYU_ADD_URL
+curl -X POST -d @json/wan-to-access.json $RYU_ADD_URL
+curl -X POST -d @json/wan-to-cpe.json $RYU_ADD_URL
+
 
 ## Aplicar reglas de QoS
 echo "## Aplicar reglas de QoS"
